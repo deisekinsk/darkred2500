@@ -2,14 +2,18 @@ import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) {
+
+
+        //isFIzzBuzz
+        int inputB = Product3.isFizzBuzz(15);
+
+        //Palindrome
+        boolean inputA = Product2.isPalindrome("madam");
+        System.out.println( inputA ? "\nIs palindrome\n" : "False palindrome\n" );
+
+
         //Dynamic list | add(); get(i); set(i,"str"); remove(i or str)
         ArrayList<Product> products = new ArrayList<>();
-
-        ArrayList<Product2> product2s = new ArrayList<>();
-
-
-        boolean isPalin = Product2.isPalindrome("madam");
-        System.out.println( isPalin ? "Is palindrome\n" : "False palindrome\n" );
 
         Product p1 = new Product();
         p1.setName("Laptop ZION0235");
@@ -27,12 +31,7 @@ public class Main {
         p4.setName("Laptop ZION0235");
         products.add(p4);
 
-        // List iteration
-        /*for (int i =0; i < products.size(); i++) {
-            System.out.println("product " + (i + 1) + ": " +
-                    products.get(i));
 
-        }*/
         ///for each
         int index = 1;
         for (Product product : products) {
