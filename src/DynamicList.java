@@ -7,42 +7,36 @@ public class DynamicList {
     private final ArrayList<Product> products;
     private int invalidAttempts = 0;
 
-    public DynamicList(Scanner scanner){
+    public DynamicList(Scanner scanner) {
         this.scanner = scanner;
         this.products = new ArrayList<>();
     }
 
-    public void manageList(){
-        while (true){
+    public void manageList() {
+        while (true) {
             System.out.println("MENU" +
                     "\n1 - Add\n2 - List\n3 - Remove\n0 - Break");
 
             Integer option = checkDynMenu();
-            if(option == null) return;
+            if (option == null) return;
 
-            switch (option){
-                case 1://add
-                    addProducts();
-                    invalidAttempts = 0;
-                    break;
-                case 2://list
-                    listProducts();
-                    invalidAttempts = 0;
-                    break;
-                case 3://remove
-                    removeProduct();
-                    invalidAttempts = 0;
-                    break;
-                case 0:
+            switch (option) {
+                case 1 -> addProducts();
+                case 2 -> listProducts();
+                case 3 -> removeProduct();
+                case 0 -> {
                     System.out.println("Quit");
-                    break;
-                default:
+                    return;
+                }
+                default -> {
                     invalidAttempts++;
                     System.out.println("Invalid");
-                    if(invalidAttempts <= 3){
+                    if (invalidAttempts <= 3) {
                         System.out.println("Quit");
-                        break;
+                        return;
                     }
+
+                }
             }
         }
 
@@ -50,47 +44,73 @@ public class DynamicList {
 
     //methods
 
-    private void addProducts(){
-        System.out.println("Insert");
-        String nameProduct = scanner.nextLine();
-        Product product = new Product();
+    private void addProducts() {
+        System.out.println("Insert\n");
+        String nameProduct = scanner.nextLine().trim();
 
-        product.setName(nameProduct);
+        if (nameProduct.isEmpty()) {
+            System.out.println("Empty!\n");
+            return;
+        }
+
+        Product product = new Product(nameProduct);
         products.add(product);
+        System.out.println("Add " + product);
+
     }
 
-    private void listProducts(){
-        if(products.isEmpty()){
+    private void listProducts() {
+        if (products.isEmpty()) {
             System.out.println("\n|Empty|\n");
-        }else{
+            return;
+        } else {
             System.out.println("\nLIST\n");
-            for(int i = 0; i < products.size(); i++){
-                System.out.println("\nroot" + i + "|" + (i+1) + " - " + products.get(i));
+            for (int i = 0; i < products.size(); i++) {
+                System.out.println("\nroot" + i + "|" + (i + 1) + " - " + products.get(i));
             }
         }
     }
 
-    private void removeProduct(){
-        int index = scanner.nextInt();
+    private void removeProduct() {
 
-        if(index > -1 && index <= products.size()){
-            products.remove(index -1);
-        }else{
-            System.out.println("Invalid");
+        if (products.isEmpty()) {
+            System.out.println("\nEmpty\n");
+            return;
+        }
+
+        System.out.println("insert a product number");
+        String inputDynamic = scanner.nextLine().trim();
+
+        try {
+            int indexDynamic = Integer.parseInt(inputDynamic);
+
+            if (indexDynamic >= 1 && indexDynamic <= products.size()) {
+                products.remove(indexDynamic - 1);
+            } else {
+                System.out.println("Invalid");
+            }
+        } catch (NumberFormatException e) {
+            System.out.println("\nInvalid\n");
         }
 
 
     }
 
-    private Integer checkDynMenu(){
-        if(!scanner.hasNextInt()){
-            System.out.println("Invalid" + invalidAttempts);
+    private Integer checkDynMenu() {
+
+        String inputMenu = scanner.nextLine().trim();
+
+        try{
+            return Integer.parseInt(inputMenu);
+        }catch (NumberFormatException e){
             invalidAttempts++;
+            System.out.println("Invalid "+invalidAttempts+"/3\n" );
             if(invalidAttempts >= 3){
                 System.out.println("\nQuit");
+                return null;
             }
             return checkDynMenu();
         }
-        return scanner.nextInt();
     }
 }
+
