@@ -45,7 +45,7 @@ public class DynamicList {
     //methods
 
     private void addProducts() {
-        System.out.println("Insert\n");
+        System.out.println("Insert");
         String nameProduct = scanner.nextLine().trim();
 
         if (nameProduct.isEmpty()) {
@@ -64,9 +64,9 @@ public class DynamicList {
             System.out.println("\n|Empty|\n");
             return;
         } else {
-            System.out.println("\nLIST\n");
+            System.out.println("\nLIST");
             for (int i = 0; i < products.size(); i++) {
-                System.out.println("\nroot" + i + "|" + (i + 1) + " - " + products.get(i));
+                System.out.println("root" + i + " | " + (i + 1) + " - " + products.get(i));
             }
         }
     }

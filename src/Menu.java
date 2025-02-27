@@ -20,28 +20,34 @@ public class Menu {
             scanner.nextLine();//clean buffer
 
             switch (choice){
-                case 1:
+                case 1 ->{
                     System.out.println("Insert a integer number\n");
                     int num = scanner.nextInt();
                     System.out.println(Product3.isFizzBuzz(num));
-                    break;
-                case 2:
+                }
+
+                case 2 ->{
                     System.out.println("Insert a word");
                     String word = scanner.next();
                     boolean isPalindrome = Product2.isPalindrome(word);
                     System.out.println(isPalindrome ? "\nTrue palindrome\n" : "False palindrome");
-                    break;
-                case 3:
+                }
+
+                case 3 -> {
                     dynamicList.manageList();
-                    break;
-                case 0:
-                    break;
-                default:
+                }
+
+                case 0 -> {
+                    return;
+                }
+                default -> {
                     System.out.println("System off");
                     break;
+                }
+
             }
 
-        } while (choice != 0);
+        } while (choice != -1);
     }
 
 
